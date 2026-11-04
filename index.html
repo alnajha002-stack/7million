@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3d2a35">
+<title>منيو 7 Million</title>
+<link rel="manifest" href='data:application/manifest+json,{"name":"7 Million Menu","short_name":"7M Menu","display":"standalone","dir":"rtl","lang":"ar","background_color":"%23fbf7f3","theme_color":"%233d2a35","start_url":"."}'>
+<style>
+:root{--ink:#2b1d25;--plum:#3d2a35;--gold:#c8a24a;--cream:#fbf7f3;--card:#fff;--mut:#7d6b74;--line:#eadfe0;--rose:#b0305f;--ok:#2f7d5b}
+@media (prefers-color-scheme:dark){:root{--ink:#f4ebea;--cream:#1d1419;--card:#2a1d24;--mut:#b7a5ad;--line:#43323b;--rose:#d84a7a}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Tajawal","Segoe UI",Tahoma,system-ui,sans-serif;padding-bottom:110px}
+header{background:linear-gradient(160deg,var(--plum),#241a20);color:#fff;padding:calc(20px + env(safe-area-inset-top)) 18px 16px;text-align:center}
+.logo{font-size:36px;font-weight:800;color:var(--gold);letter-spacing:1px;user-select:none}
+.logo small{display:block;font-size:12px;letter-spacing:6px;color:#e9d9b0;font-weight:600}
+.slogan{margin:8px 0 0;font-size:15px;opacity:.9}
+.net{margin-top:8px;font-size:12px;display:inline-flex;gap:6px;align-items:center;background:#ffffff22;border-radius:99px;padding:3px 12px}
+.net i{width:8px;height:8px;border-radius:50%;background:#e05555;display:inline-block}
+.net.on i{background:#5be08a}
+.bar{position:sticky;top:0;z-index:5;background:var(--cream);border-bottom:1px solid var(--line);padding:8px 0}
+.search{display:block;width:calc(100% - 24px);margin:0 12px 8px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:99px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--c,var(--plum));border-color:var(--c,var(--plum));color:#fff}
+main{padding:12px}
+section{margin-bottom:18px;background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+section h2{margin:0;padding:12px 16px;background:var(--c);color:#fff;font-size:18px;display:flex;justify-content:space-between;align-items:baseline}
+section h2 span{font-size:12px;opacity:.85;font-weight:400}
+.it{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line)}
+.it.off{opacity:.45}
+.ph{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none;background:var(--line);border:0}
+.nm{flex:1;font-size:16px;line-height:1.4}
+.tag{font-size:11px;background:var(--rose);color:#fff;border-radius:6px;padding:2px 6px;margin-inline-start:6px;white-space:nowrap}
+.pr{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pr s{color:var(--mut);font-weight:400;font-size:12px;margin-inline-end:6px}
+.add{width:34px;height:34px;border-radius:50%;border:0;background:var(--c);color:#fff;font-size:20px;line-height:1;cursor:pointer;flex:none}
+.add:active{transform:scale(.9)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px}
+.card h3{margin:0 0 6px;font-size:16px}.card p{margin:0 0 10px;color:var(--mut);font-size:14px;line-height:1.7}
+.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--plum);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.btn.g{background:var(--gold);color:#2b1d25}.btn.o{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn.d{background:var(--rose)}
+.offer{background:linear-gradient(135deg,var(--rose),#7d2347);color:#fff;border:0}.offer p{color:#ffe9f0}
+.cart{position:fixed;inset-inline:12px;bottom:calc(12px + env(safe-area-inset-bottom));background:var(--plum);color:#fff;border-radius:16px;padding:12px 16px;display:none;align-items:center;gap:12px;z-index:9;box-shadow:0 6px 24px #0005}
+.cart.show{display:flex}.cart div{flex:1;font-size:14px}.cart b{font-size:17px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:10px}
+footer button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer}
+.toast{position:fixed;top:calc(12px + env(safe-area-inset-top));inset-inline:12px;background:var(--rose);color:#fff;border-radius:14px;padding:14px 16px;z-index:30;display:none;box-shadow:0 8px 30px #0006}
+.toast.show{display:block}.toast b{display:block;font-size:17px;margin-bottom:2px}
+dialog{border:0;border-radius:18px;padding:0;width:min(94vw,560px);max-height:92vh;background:var(--cream);color:var(--ink)}
+dialog::backdrop{background:#000a}
+.pnl{padding:16px;overflow:auto;max-height:92vh}
+.pnl h2{margin:0 0 10px}.pnl h3{margin:16px 0 6px;font-size:15px;color:var(--rose)}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.pick{max-height:190px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:4px 10px}
+.pick label{display:flex;gap:8px;align-items:center;margin:0;padding:6px 0;color:var(--ink);font-size:14px}
+.pick input{width:auto}
+.out{word-break:break-all;direction:ltr;text-align:left;font-size:12px;background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:8px;margin:8px 0}
+.mut{color:var(--mut);font-size:13px;line-height:1.7}
+.admItem{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.admItem input{padding:6px 8px;font-size:13px}
+.admItem .nm2{flex:1;min-width:90px}
+.admItem .p2{width:64px;flex:none}
+.admItem .i2{width:100%;font-size:12px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" id="logo">7M<small id="shopname">MILLION</small></div>
+  <p class="slogan">روح وشغف · في كل كوب حكاية</p>
+  <span class="net" id="net"><i></i><span id="netT">جارٍ الفحص…</span></span>
+</header>
+
+<div class="bar">
+  <input class="search" id="q" type="search" placeholder="ابحث عن مشروب أو حلى" aria-label="بحث">
+  <nav class="chips" id="chips"></nav>
+</div>
+
+<div id="join"></div>
+<div id="offerBox"></div>
+<main id="menu"></main>
+<footer><button id="adminBtn">الإدارة</button> · <button id="histBtn">سجل الطلبات</button></footer>
+
+<div class="cart" id="cart"><div><b id="cn">0</b> عنصر · المجموع <b id="ct">0</b><br><small id="cd"></small></div><button class="btn g" id="confirm">إتمام الطلب</button></div>
+<div class="toast" id="toast" role="alert"></div>
+<dialog id="adm"><div class="pnl" id="admBody"></div></dialog>
+<dialog id="ord"><div class="pnl" id="ordBody"></div></dialog>
+
+<script>
+/* ================= البيانات الافتراضية ================= */
+const DEF=[
+{n:"القهوة الباردة",e:"Iced Coffee",c:"#6b4aa0",i:[["ايس لاتيه",4],["ايس كرميل",4],["ايس كابتشينو",4],["ايس بندق",4],["ايس كوكيز",4],["ايس ترامسيو",4],["ايس فانيلا",4],["ايس موكا",4],["ايس امريكانو",4],["ايس سبانش",4],["ايس جوكليت",3.5],["ايس افوكاتو",4],["ايس الفريدو",4],["ايس فانيلا وجوز الهند",4],["ايس كرميل وجوز الهند",4],["كولد برو",5]]},
+{n:"لاتيه النكهات",e:"Flavored Latte",c:"#d98f1c",i:[["لاتيه كرميل",4],["لاتيه كرميل ماكياتو",4],["لاتيه بستاشيو",4],["لاتيه فانيلا",4],["لاتيه بندق",4],["لاتيه كوكيز",4],["سبانش لاتيه",4]]},
+{n:"القهوة الكلاسيكية والحليب",e:"Classic Espresso & Milk",c:"#5f7d3a",i:[["كابتشينو",3.5],["فلات وايت",4],["موكا",4],["نسكافيه دبل",2.5],["نسكافيه صغير",1]]},
+{n:"القهوة التقليدية",e:"Traditional Coffee",c:"#8662a8",i:[["قهوة تركية",2],["قهوة فرنسية",2]]},
+{n:"القهوة السوداء والمركزة",e:"Black & Pure Coffee",c:"#3f8f94",i:[["اسبرسو سنغل",2],["اسبرسو دبل",3],["امريكانو",3.5],["ألفريدو",4]]},
+{n:"المشروبات الدافئة والشوكولاتة",e:"Warm & Chocolate",c:"#6a3d2a",i:[["هوت شوكليت دبل",3],["هوت شوكليت صغير",2],["شاي",5],["جاي كرك",2],["جاي ليمون",2],["حليب بالعسل",1.5]]},
+{n:"العصائر الطبيعية",e:"Fresh Juices",c:"#e0742c",i:[["فواكه استوائية",4],["فواكه حمراء",4],["منكا وفروله",4],["كوكتيل",4],["منكا",4],["فروله",3.5],["برتقال",3.5],["ليمون",3.5],["ليمون ونعناع",3.5],["برتقال وفروله",3.5],["ليمون وفروله",3.5],["موز وحليب",3.5],["موز وحليب ونوتيلا",3.5]]},
+{n:"سموذي",e:"Smoothie",c:"#a82a5c",i:[["فروله",4],["منكا",4],["دراق",4],["اناناس",4]]},
+{n:"ميلك شيك",e:"Milkshake",c:"#8a6a50",i:[["بستاشيو",4],["كندر",4],["نوتيلا",4],["اوريو",4],["لوتس",4],["كيت كات",4]]},
+{n:"الموهيتو",e:"Mojito",c:"#d8567e",i:[["منكا وباشن فروت",3.5],["مكسيكي",3.5],["رمان",3.5],["ليمون ونعناع",3.5],["مكس 7million",4],["بلو اوشن",3.5],["فروله",3.5],["هافانا",3.5],["ميكس بلوو باشن",4]]},
+{n:"الآيس تي",e:"Ice Tea",c:"#b02a58",i:[["فروله",3.5],["خوخ",3.5],["باشن",3.5],["ليمون",3.5],["ايس كركدي ليمون",3.5],["ايس كركدي فروله",3.5],["ايس كركدي اناناس",3.5]]},
+{n:"فرابيه",e:"Frappé",c:"#e08a2e",i:[["كرميل",4],["فانيلا",4],["شوكلا",4],["اوريو",4],["لوتس",4],["بستاشيو",4]]},
+{n:"المعجنات",e:"Pastries",c:"#c46a7a",i:[["كرواسون",3],["براونز",3],["كوكيز",2]]}
+];
+/* أدوات */
+const $=s=>document.querySelector(s),LS={g:(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch{return d}},s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const fmt=n=>(+n).toFixed(3);
+const enc=o=>encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(o)))));
+const dec=s=>JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(s)))));
+const dist=(a,b,c,d)=>{const R=6371000,r=x=>x*Math.PI/180,p=r(c-a),q=r(d-b),h=Math.sin(p/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(q/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+
+/* تحميل المنيو: إن وُجدت نسخة معدّلة من الإدارة استخدمها، وإلا حوّل الافتراضي لصيغة كاملة */
+let MENU=LS.g('menu7',null);
+if(!MENU){MENU=DEF.map(s=>({n:s.n,e:s.e,c:s.c,i:s.i.map(x=>({n:x[0],p:x[1],img:"",on:true}))}));LS.s('menu7',MENU)}
+let shop=LS.g('shop',null),offer=LS.g('offer',null),stats=LS.g('stats',{}),orders=LS.g('orders',[]),cart={},near=false;
+const saveMenu=()=>LS.s('menu7',MENU);
+const allIds=()=>{const r=[];MENU.forEach((s,si)=>s.i.forEach((it,ii)=>r.push(si+'-'+ii)));return r};
+function price(id){const[a,b]=id.split('-');return +MENU[a].i[b].p}
+function name(id){const[a,b]=id.split('-');return MENU[a].i[b].n}
+function item(id){const[a,b]=id.split('-');return MENU[a].i[b]}
+function gone(id){const[a,b]=id.split('-');return !MENU[a]||!MENU[a].i[b]}
+Object.keys(cart).forEach(id=>{if(gone(id))delete cart[id]});
+
+/* ===== رابط الانضمام/العرض ===== */
+(function(){const m=location.hash.match(/#d=(.+)/);if(!m)return;try{const d=dec(m[1]);if(d.s){shop=d.s;LS.s('shop',shop)}if(d.m){MENU=d.m;saveMenu()}if(d.o){offer=d.o;LS.s('offer',offer);LS.s('seen',null)}LS.s('joined',true);history.replaceState(null,'',location.pathname+location.search)}catch(e){}})();
+
+/* ===== صور: بحث حقيقي من الإنترنت (Wikimedia Commons بدون مفتاح) ===== */
+const EMO=[[/قهوة|كابتشينو|لاتيه|اسبرسو|امريكانو|كولد/,'☕'],[/شوك|نوتيلا|براونز|كوكيز|اوريو|كندر|كيت/,'🍫'],[/عصير|فواكه|فروله|منكا|برتقال|ليمون|موز|اناناس|رمان|خوخ|دراق|كوكتيل/,'🧃'],[/ميلك|شيك/,'🥤'],[/موهيتو/,'🍹'],[/شاي|كرك/,'🍵'],[/كرواسون|معجنات/,'🥐']];
+const emojiFor=n=>{for(const[r,e]of EMO)if(r.test(n))return e;return '🥤'};
+function phImg(it){ // صورة مربعة صغيرة مولّدة (SVG) كاحتياط عند انقطاع الصورة
+  const e=emojiFor(it.n),h=[...it.n].slice(0,2).join('');
+  return 'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="104" height="104"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8a24a"/><stop offset="1" stop-color="#3d2a35"/></linearGradient></defs><rect width="104" height="104" rx="20" fill="url(#g)"/><text x="52" y="66" font-size="44" text-anchor="middle">${e}</text><text x="52" y="94" font-size="14" fill="#ffffffcc" text-anchor="middle" font-family="sans-serif">${h}</text></svg>`);
+}
+async function netImg(q){ // جلب رابط صورة حقيقي من الإنترنت حسب الاسم
+  try{
+    const u=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q+' drink')}&gsrnamespace=6&gsrlimit=3&prop=pageimages&piprop=thumbnail&pithumbsize=400&format=json&origin=*`;
+    const r=await fetch(u);const j=await r.json();
+    const pages=j.query&&j.query.pages?Object.values(j.query.pages):[];
+    for(const p of pages){if(p.thumbnail&&p.thumbnail.source)return p.thumbnail.source}
+  }catch(e){}
+  return "";
+}
+
+/* ===== رسم المنيو ===== */
+function discFor(id){return offer&&offer.i.includes(id)&&near?offer.d:0}
+function render(){
+  const q=$('#q').value.trim();let h='',ch='';
+  MENU.forEach((s,si)=>{
+    const its=s.i.map((x,ii)=>({x,id:si+'-'+ii})).filter(o=>o.x.on&&(!q||o.x.n.includes(q)||s.n.includes(q)));
+    if(!its.length)return;
+    ch+=`<button class="chip" style="--c:${s.c}" data-t="s${si}">${s.n}</button>`;
+    h+=`<section id="s${si}" style="--c:${s.c}"><h2>${s.n}<span>${s.e}</span></h2>`+its.map(({x,id})=>{
+      const d=discFor(id),inOffer=offer&&offer.i.includes(id);
+      const pr=d?`<s>${fmt(x.p)}</s>${fmt(x.p*(1-d/100))}`:fmt(x.p);
+      return `<div class="it"><img class="ph" loading="lazy" alt="${x.n}" src="${x.img||phImg(x)}" onerror="this.onerror=null;this.src='${phImg(x)}'"><div class="nm">${x.n}${inOffer?`<span class="tag">خصم ${offer.d}%</span>`:''}</div><div class="pr">${pr}</div><button class="add" style="--c:${s.c}" aria-label="إضافة ${x.n}" data-a="${id}">+</button></div>`}).join('')+'</section>';
+  });
+  $('#menu').innerHTML=h||'<div class="card"><p>لا توجد نتائج. جرّب كلمة أخرى.</p></div>';
+  $('#chips').innerHTML=ch;renderCart();renderOffer();
+}
+function renderCart(){
+  let n=0,t=0,sv=0;for(const id in cart){if(gone(id))continue;const p=price(id),d=discFor(id);n+=cart[id];t+=cart[id]*p*(1-d/100);sv+=cart[id]*p*d/100}
+  $('#cart').classList.toggle('show',n>0);$('#cn').textContent=n;$('#ct').textContent=fmt(t);$('#cd').textContent=sv?`وفّرت ${fmt(sv)} بفضل العرض`:'';
+}
+function renderOffer(){
+  const b=$('#offerBox');
+  if(!offer){b.innerHTML='';return}
+  b.innerHTML=`<div class="card offer"><h3>${offer.t}</h3><p>خصم ${offer.d}% على الأصناف المعلّمة، لمن يكون ضمن ${offer.r} متراً من ${shop?shop.n:'المحل'}.<br>${near?'أنت ضمن النطاق الآن، الخصم مفعّل.':'اقترب من المحل ليتفعّل الخصم تلقائياً.'}</p></div>`;
+}
+function renderJoin(){
+  const j=LS.g('joined',false),ok='Notification' in window&&Notification.permission==='granted';
+  $('#join').innerHTML=(ok&&j)?'':`<div class="card"><h3>${j?'فعّل الإشعارات':'مرحباً بك'}</h3><p>فعّل الإشعارات الحقيقية لتصلك عروض المحل وخصوماتها عندما تكون قريباً منه، حتى وأنت خارج التطبيق.</p><button class="btn g" id="enable">تفعيل الإشعارات</button></div>`;
+}
+
+/* ===== الإشعارات الحقيقية ===== */
+function notify(t,b){
+  try{navigator.vibrate&&navigator.vibrate([250,120,250,120,500])}catch{}
+  if('Notification' in window&&Notification.permission==='granted'){try{const n=new Notification(t,{body:b,dir:'rtl',lang:'ar',icon:'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96"><rect width="96" height="96" rx="22" fill="#3d2a35"/><text x="48" y="62" font-size="40" text-anchor="middle" fill="#c8a24a">7M</text></svg>'),badge:'data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="96"/%3E',vibrate:[250,120,250]});n.onclick=()=>{window.focus();n.close()}}catch(e){}}
+  const el=$('#toast');el.innerHTML=`<b>${t}</b>${b}`;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),9000);
+}
+let watchId=null;
+function startWatch(){
+  if(watchId!==null||!navigator.geolocation)return;
+  watchId=navigator.geolocation.watchPosition(p=>{
+    if(!shop||!offer)return;
+    const d=dist(p.coords.latitude,p.coords.longitude,shop.la,shop.ln),was=near;near=d<=offer.r;
+    if(near&&!was){if(LS.g('seen',null)!==offer.id){LS.s('seen',offer.id);notify(offer.t,`خصم ${offer.d}% متاح الآن في ${shop.n}`)}render()}
+    else if(near!==was)render();
+  },()=>{},{enableHighAccuracy:true,maximumAge:10000});
+}
+async function enable(){
+  try{if('Notification' in window){const p=await Notification.requestPermission();if(p!=='granted')notify('تنبيه','لم يتم منح إذن الإشعارات من إعدادات المتصفح.')}}catch{}
+  LS.s('joined',true);try{navigator.vibrate&&navigator.vibrate(80)}catch{}
+  startWatch();renderJoin();
+}
+
+/* ===== حالة الشبكة ===== */
+function netState(){const on=navigator.onLine;$('#net').classList.toggle('on',on);$('#netT').textContent=on?'متصل بالإنترنت':'وضع عدم الاتصال — يعمل محلياً'}
+addEventListener('online',()=>{netState();notify('عاد الاتصال','تمت مزامنة وضع الإنترنت.')});
+addEventListener('offline',()=>{netState();notify('انقطع الاتصال','المنيو يستمر بالعمل بدون إنترنت.')});
+netState();
+
+/* ===== الأحداث ===== */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-a]');if(a){cart[a.dataset.a]=(cart[a.dataset.a]||0)+1;renderCart();try{navigator.vibrate&&navigator.vibrate(15)}catch{}return}
+  const t=e.target.closest('[data-t]');if(t){document.getElementById(t.dataset.t).scrollIntoView();document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===t));return}
+  if(e.target.id==='enable')enable();
+});
+$('#q').addEventListener('input',render);
+
+/* إتمام الطلب */
+$('#confirm').onclick=()=>{
+  const ids=Object.keys(cart).filter(id=>!gone(id)&&cart[id]>0);if(!ids.length)return;
+  const tot=ids.reduce((s,id)=>s+cart[id]*price(id)*(1-discFor(id)/100),0);
+  $('#ordBody').innerHTML=`<h2>إتمام الطلب</h2>
+  <div class="pick" style="max-height:220px">${ids.map(id=>`<label>${cart[id]} × ${name(id)} — ${fmt(cart[id]*price(id)*(1-discFor(id)/100))}</label>`).join('')}</div>
+  <p class="mut">المجموع: <b>${fmt(tot)}</b></p>
+  <label>اسمك (للنداء عليك)</label><input id="cName" placeholder="مثال: أبو محمد">
+  <label>ملاحظات</label><input id="cNote" placeholder="بدون سكر، زيادة ثلج...">
+  <div class="row" style="margin-top:12px"><button class="btn g" id="okOrd">تأكيد</button><button class="btn o" id="noOrd">رجوع</button></div>`;
+  $('#ord').showModal();
+  $('#noOrd').onclick=()=>$('#ord').close();
+  $('#okOrd').onclick=()=>{
+    const nm=$('#cName').value.trim()||'زبون';
+    ids.forEach(id=>stats[id]=(stats[id]||0)+cart[id]);
+    orders.push({n:nm,note:$('#cNote').value.trim(),ids:ids.map(id=>[id,cart[id]]),t:tot,ts:Date.now()});
+    LS.s('stats',stats);LS.s('orders',orders);
+    cart={};renderCart();$('#ord').close();notify(`شكراً ${nm}!`,`تم تأكيد طلبك بقيمة ${fmt(tot)}. أخبر الكاشير باسمك.`);
+  };
+};
+$('#histBtn').onclick=()=>{
+  $('#ordBody').innerHTML=`<h2>سجل الطلبات</h2>`+(orders.length?orders.slice(-15).reverse().map(o=>`<p class="mut"><b>${o.n}</b> · ${fmt(o.t)} · ${new Date(o.ts).toLocaleString('ar')}<br>${o.ids.map(([id,c])=>`${c}× ${gone(id)?'(صنف حُذف)':name(id)}`).join('، ')}${o.note?`<br>ملاحظة: ${o.note}`:''}</p>`).join(''):'<p class="mut">لا توجد طلبات بعد.</p>')+`<div style="margin-top:10px"><button class="btn o" id="cl2">إغلاق</button></div>`;
+  $('#ord').showModal();$('#cl2').onclick=()=>$('#ord').close();
+};
+
+/* ===== لوحة الإدارة ===== */
+let taps=0;$('#logo').onclick=()=>{if(++taps>=5){taps=0;openAdmin()}setTimeout(()=>taps=0,2500)};
+$('#adminBtn').onclick=openAdmin;
+function openAdmin(){
+  const pin=LS.g('pin','1234'),x=prompt('رمز الإدارة');
+  if(x===null)return;if(x!==pin){alert('الرمز غير صحيح');return}
+  const top=Object.entries(stats).sort((a,b)=>b[1]-a[1]),topIds=top.slice(0,5).map(t=>t[0]);
+  const all=allIds();
+  $('#admBody').innerHTML=`<h2>لوحة الإدارة</h2>
+  <h3>المحل</h3>
+  <label>اسم المحل</label><input id="an" value="${shop?shop.n:'7 Million'}">
+  <div class="row"><div><label>خط العرض</label><input id="ala" inputmode="decimal" value="${shop?shop.la:''}"></div><div><label>خط الطول</label><input id="aln" inputmode="decimal" value="${shop?shop.ln:''}"></div></div>
+  <div class="row" style="margin-top:8px"><button class="btn o" id="gps">تحديد موقعي الحالي</button><button class="btn" id="saveShop">حفظ المحل</button></div>
+  <h3>إضافة صنف جديد</h3>
+  <label>الاسم</label><input id="nn" placeholder="مثال: ايس كركديه">
+  <div class="row"><div><label>السعر</label><input id="np2" inputmode="decimal" placeholder="4"></div><div><label>القسم</label><select id="nc">${MENU.map((s,i)=>`<option value="${i}">${s.n}</option>`).join('')}</select></div></div>
+  <label>رابط صورة (اختياري)</label><input id="ni" placeholder="https://... أو اتركه فارغاً وابحث">
+  <div class="row" style="margin-top:8px"><button class="btn o" id="sImg">بحث تلقائي عن صورة حقيقية</button><button class="btn g" id="addIt">إضافة الصنف</button></div>
+  <h3>الأصناف (${all.length}) — عدّل السعر/الاسم/الصورة مباشرة</h3>
+  <div style="max-height:300px;overflow:auto">${all.map(id=>{const[a,b]=id.split('-'),it=MENU[a].i[b];return `
+    <div class="admItem"><img class="ph" style="width:38px;height:38px" src="${it.img||phImg(it)}" onerror="this.src='${phImg(it)}'">
+    <input class="nm2" data-f="n" data-id="${id}" value="${it.n.replace(/"/g,'&quot;')}">
+    <input class="p2" data-f="p" data-id="${id}" inputmode="decimal" value="${it.p}">
+    <button class="btn o" style="padding:6px 10px;font-size:12px" data-img="${id}">صورة</button>
+    <button class="btn ${it.on?'':'d'}" style="padding:6px 10px;font-size:12px" data-on="${id}">${it.on?'متوفر':'موقوف'}</button>
+    <button class="btn d" style="padding:6px 10px" data-del="${id}">✕</button></div>`}).join('')}</div>
+  <h3>إضافة قسم جديد</h3>
+  <div class="row"><input id="nsn" placeholder="اسم القسم"><input id="nsc" type="color" value="#6b4aa0" style="padding:2px;height:42px"></div>
+  <button class="btn" style="margin-top:8px" id="addSec">إضافة القسم</button>
+  <h3>الأكثر طلباً (على هذا الجهاز)</h3>
+  <p class="mut">${top.length?top.slice(0,5).map(t=>`${gone(t[0])?'(صنف حُذف)':name(t[0])} (${t[1]})`).join('، '):'لا توجد طلبات مؤكدة بعد.'}</p>
+  <h3>إنشاء عرض وإشعار</h3>
+  <label>عنوان الإشعار</label><input id="ot" value="عرض خاص من ${shop?shop.n:'7 Million'}">
+  <div class="row"><div><label>نسبة الخصم %</label><input id="od" type="number" min="1" max="90" value="15"></div>
+  <div><label>المسافة بالمتر</label><select id="or">${[10,20,30,40,50,60,70,80,90,100].map(v=>`<option ${v===100?'selected':''}>${v}</option>`).join('')}</select></div></div>
+  <label>الأصناف المشمولة</label><div class="pick">${all.map(id=>`<label><input type="checkbox" value="${id}" ${topIds.includes(id)?'checked':''}>${name(id)} <span class="mut">(${MENU[id.split('-')[0]].n})</span></label>`).join('')}</div>
+  <div style="margin-top:10px"><button class="btn g" id="mk">إنشاء رابط الإشعار</button> <button class="btn" id="mkNotif">إرسال إشعار تجريبي الآن</button></div>
+  <div id="res"></div>
+  <h3>رابط الانضمام فقط</h3>
+  <button class="btn o" id="mkj">إنشاء رابط الانضمام (للباركود)</button><div id="resj"></div>
+  <h3>نسخ احتياطي ونقل</h3>
+  <div class="row"><button class="btn o" id="exp">تصدير البيانات</button><button class="btn o" id="imp">استيراد بيانات</button></div>
+  <input type="file" id="impF" accept="application/json" style="display:none">
+  <h3>رمز الإدارة</h3>
+  <div class="row"><input id="np" placeholder="رمز جديد"><button class="btn o" id="sp">حفظ</button></div>
+  <div style="margin-top:14px"><button class="btn o" id="cl">إغلاق</button></div>`;
+  $('#adm').showModal();
+  const sh=()=>({n:$('#an').value.trim()||'7 Million',la:parseFloat($('#ala').value),ln:parseFloat($('#aln').value)});
+  const okShop=s=>isFinite(s.la)&&isFinite(s.ln);
+  $('#gps').onclick=()=>navigator.geolocation.getCurrentPosition(p=>{$('#ala').value=p.coords.latitude.toFixed(6);$('#aln').value=p.coords.longitude.toFixed(6)},()=>alert('تعذّر تحديد الموقع. فعّل GPS وصلاحية الموقع.'),{enableHighAccuracy:true});
+  $('#saveShop').onclick=()=>{const s=sh();if(!okShop(s)){alert('حدّد الموقع أولاً');return}shop=s;LS.s('shop',s);$('#shopname').textContent=s.n.toUpperCase();alert('تم حفظ المحل')};
+  $('#sImg').onclick=async()=>{const q=$('#nn').value.trim();if(!q){alert('اكتب اسم الصنف أولاً');return}$('#sImg').textContent='جارٍ البحث…';const u=await netImg(q);$('#sImg').textContent='بحث تلقائي عن صورة حقيقية';$('#ni').value=u;alert(u?'تم العثور على صورة حقيقية من الإنترنت':'لم يُعثر على صورة، أدخل رابطاً يدوياً')};
+  $('#addIt').onclick=()=>{const n=$('#nn').value.trim(),p=parseFloat($('#np2').value);if(!n||!isFinite(p)){alert('أدخل الاسم والسعر');return}MENU[+$('#nc').value].i.push({n,p,img:$('#ni').value.trim(),on:true});saveMenu();render();openAdmin()};
+  document.querySelectorAll('[data-f]').forEach(el=>el.onchange=()=>{const[a,b]=el.dataset.id.split('-'),it=MENU[a].i[b];if(el.dataset.f==='p'){const v=parseFloat(el.value);if(isFinite(v))it.p=v}else it.n=el.value.trim()||it.n;saveMenu();render()});
+  document.querySelectorAll('[data-img]').forEach(el=>el.onclick=async()=>{el.textContent='…';const u=await netImg(name(el.dataset.img));item(el.dataset.img).img=u;saveMenu();render();el.textContent=u?'تم':'فشل';if(!u)alert('لم يُعثر على صورة، أدخل رابطاً يدوياً من حقول الصنف')});
+  document.querySelectorAll('[data-on]').forEach(el=>el.onclick=()=>{const[a,b]=el.dataset.on.split('-');MENU[a].i[b].on=!MENU[a].i[b].on;saveMenu();render();openAdmin()});
+  document.querySelectorAll('[data-del]').forEach(el=>el.onclick=()=>{if(!confirm('حذف "'+name(el.dataset.del)+'"؟'))return;const[a,b]=el.dataset.del.split('-');MENU[a].i.splice(b,1);delete stats[el.dataset.del];saveMenu();LS.s('stats',stats);render();openAdmin()});
+  $('#addSec').onclick=()=>{const n=$('#nsn').value.trim();if(!n){alert('أدخل اسم القسم');return}MENU.push({n,e:'',c:$('#nsc').value,i:[]});saveMenu();render();openAdmin()};
+  const share=(box,url,txt)=>{$(box).innerHTML=`<div class="out">${url}</div><div class="row"><button class="btn" data-cp>نسخ الرابط</button><button class="btn g" data-sh>مشاركة</button></div>`;
+    $(box).querySelector('[data-cp]').onclick=()=>{navigator.clipboard?navigator.clipboard.writeText(url).then(()=>alert('تم النسخ')):prompt('انسخ الرابط',url)};
+    $(box).querySelector('[data-sh]').onclick=()=>navigator.share?navigator.share({title:txt,text:txt,url}).catch(()=>{}):prompt('انسخ الرابط',url)};
+  $('#mk').onclick=()=>{
+    const s=sh();if(!okShop(s)){alert('حدّد موقع المحل أولاً');return}
+    const ids=[...document.querySelectorAll('.pick input:checked')].map(c=>c.value).filter(id=>!gone(id));if(!ids.length){alert('اختر صنفاً واحداً على الأقل');return}
+    const d=Math.min(90,Math.max(1,parseInt($('#od').value)||0));
+    const o={id:Date.now().toString(36),t:$('#ot').value.trim()||'عرض خاص',d,r:parseInt($('#or').value),i:ids};
+    shop=s;LS.s('shop',s);offer=o;LS.s('offer',o);LS.s('seen',null);
+    share('#res',location.href.split('#')[0]+'#d='+enc({s,o}),o.t);render()};
+  $('#mkNotif').onclick=()=>notify('إشعار تجريبي','نظام الإشعارات يعمل بشكل صحيح.');
+  $('#mkj').onclick=()=>{const s=sh();if(!okShop(s)){alert('حدّد موقع المحل أولاً');return}shop=s;LS.s('shop',s);share('#resj',location.href.split('#')[0]+'#d='+enc({s,m:MENU}),'انضم لمنيو '+s.n)};
+  $('#sp').onclick=()=>{const v=$('#np').value.trim();if(v.length<4){alert('4 خانات على الأقل');return}LS.s('pin',v);alert('تم تغيير الرمز')};
+  $('#exp').onclick=()=>{const blob=new Blob([JSON.stringify({menu:MENU,shop,stats,orders},null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='7million-backup.json';a.click()};
+  $('#imp').onclick=()=>$('#impF').click();
+  $('#impF').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(j.menu)MENU=j.menu;if(j.shop)shop=j.shop;if(j.stats)stats=j.stats;if(j.orders)orders=j.orders;saveMenu();LS.s('shop',shop);LS.s('stats',stats);LS.s('orders',orders);render();alert('تم الاستيراد بنجاح');openAdmin()}catch{alert('ملف غير صالح')}};r.readAsText(f)};
+  $('#cl').onclick=()=>$('#adm').close();
+}
+
+/* ===== التشغيل ===== */
+if(shop)$('#shopname').textContent=shop.n.toUpperCase();
+render();renderJoin();
+if('Notification' in window&&Notification.permission==='granted'&&LS.s && LS.g('joined',false))startWatch();
+if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
